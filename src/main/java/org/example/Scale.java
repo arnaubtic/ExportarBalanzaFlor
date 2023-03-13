@@ -3,9 +3,7 @@ package org.example;
 import org.json.JSONObject;
 
 import java.sql.*;
-import java.util.Locale;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 
 public class Scale {
@@ -14,117 +12,121 @@ public class Scale {
     public static void main(String[] args) {
         Locale.setDefault(Locale.ENGLISH);
         scale = new Scale();
-        if (scale.SelectCabecera() == 0) {
-            //scale.StatusEnviado();
-        }
 
-    }
+        try (Connection con = dbMysql.startConnection();
+             Statement stmt = con.createStatement();
+             Statement stUpdate = con.createStatement();
+             Connection con2 = dbSql.startConnection();
+             Statement stInsert = con2.createStatement()) {
+            ResultSet rs = dbMysql.getSelect(stmt,
+                    "select IdEmpresa, Tipo as TipoTicket, IdBalanzaMaestra, NumTicket, IdSeccion, IdVendedor, " +
+                            "IdCliente, NumLineas,ImporteTotal, Fecha as FechaInicio, Fecha as FechaFin, " +
+                            "0 as StatusTraspasado, idticket from sys_datos.dat_ticket_cabecera where Enviado = 0");
 
-    private void StatusEnviado() {
-        try (Connection con = dbMysql.startConnection(); Statement stmt = con.createStatement()) {
-            System.out.println("Status Enviado updated successfully");
-            dbMysql.insert(stmt, "update sys_datos.dat_ticket_cabecera set Enviado = 1 where Enviado = 0");
+            while (rs.next()) {
+                System.out.println("IDTICKET: " + scale.SelectCabecera(rs, stUpdate, stInsert));
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
     }
 
-    private int SelectCabecera() {
+    private String SelectCabecera(ResultSet rs, Statement stupdate, Statement stinsert) throws SQLException {
+
+        JSONObject cabecera = new JSONObject();
+        //comprobar si idempresa es null, si es null poner 0
+        String idEmpresa = rs.getString("IdEmpresa");
+        cabecera.put("IdEmpresa", Objects.requireNonNullElse(idEmpresa, 0));
+
+        String tipoTicket = rs.getString("TipoTicket");
+        cabecera.put("TipoTicket", Objects.requireNonNullElse(tipoTicket, ""));
+
+        String idBalanzaMaestra = rs.getString("IdBalanzaMaestra");
+        cabecera.put("IdBalanzaMaestra", Objects.requireNonNullElse(idBalanzaMaestra, 0));
+
+        String numTicket = rs.getString("NumTicket");
+        cabecera.put("NumTicket", Objects.requireNonNullElse(numTicket, 0));
+
+        String idSeccion = rs.getString("IdSeccion");
+        cabecera.put("IdSeccion", Objects.requireNonNullElse(idSeccion, 0));
+
+        String idVendedor = rs.getString("IdVendedor");
+        cabecera.put("IdVendedor", Objects.requireNonNullElse(idVendedor, 0));
+
+        String idCliente = rs.getString("IdCliente");
+        cabecera.put("IdCliente", Objects.requireNonNullElse(idCliente, 0));
+
+        String numLineas = rs.getString("NumLineas");
+        cabecera.put("NumLineas", Objects.requireNonNullElse(numLineas, 0));
+
+        String importeTotal = rs.getString("ImporteTotal");
+        cabecera.put("ImporteTotal", Objects.requireNonNullElse(importeTotal, 0));
+
+        String fechaInicio = rs.getString("FechaInicio");
+        cabecera.put("FechaInicio", Objects.requireNonNullElse(fechaInicio, ""));
+
+        String fechaFin = rs.getString("FechaFin");
+        cabecera.put("FechaFin", Objects.requireNonNullElse(fechaFin, ""));
+
+        cabecera.put("bTIC_IdTicket", UUID.randomUUID().toString());
+
+        String id = rs.getString("idticket");
+
+
+        String insert = String.format("insert into [MBVic].[dbo].[bTIC_CabeceraTicket4] values " +
+                        "(%s,'%s', %s, %s, %s, %s, %s, %s, %s, '%s', '%s', 0, 0, '%s');",
+                cabecera.getInt("IdEmpresa"),
+                cabecera.getString("TipoTicket"),
+                cabecera.getInt("IdBalanzaMaestra"),
+                cabecera.getInt("NumTicket"),
+                cabecera.getInt("IdSeccion"),
+                cabecera.getInt("IdVendedor"),
+                cabecera.getInt("IdCliente"),
+                cabecera.getInt("NumLineas"),
+                String.format("%.0f", Double.parseDouble(cabecera.getString("ImporteTotal")) * 100),
+                cabecera.getString("FechaInicio"),
+                cabecera.getString("FechaFin"),
+                cabecera.getString("bTIC_IdTicket"));
+
+        System.out.println(insert);
+        dbSql.insert(stinsert, insert);
+
+        dbMysql.update(stupdate, "update sys_datos.dat_ticket_cabecera set Enviado = 1 where idticket = " + id);
+        String idTicket = cabecera.getString("bTIC_IdTicket");
+        scale.SelectLineas(idTicket, id, idEmpresa);
+        scale.SelectFormaPago(idTicket, id, idEmpresa);
+        return idTicket;
+    }
+
+    private void SelectFormaPago(String idTicket, String idMysql, String idEmpresa) {
         try (Connection con = dbMysql.startConnection();
              Statement stmt = con.createStatement();
              Connection con2 = dbSql.startConnection();
              Statement stmt2 = con2.createStatement()) {
-
-            ResultSet rs = dbMysql.getSelect(stmt,
-                    "select IdEmpresa, Tipo as TipoTicket, IdBalanzaMaestra, NumTicket, IdSeccion, IdVendedor, IdCliente, NumLineas,ImporteTotal, Fecha as FechaInicio, Fecha as FechaFin, 0 as StatusTraspasado, idticket from sys_datos.dat_ticket_cabecera where Enviado = 0");
-
-            //NECESITO MANTENER EL RESULT SET ABIERTO O PASARLO A LISTA PARA PODER RECORRERLO
-            while (rs.next()) {
-
-                JSONObject cabecera = new JSONObject();
-                //comprobar si idempresa es null, si es null poner 0
-                String idEmpresa = rs.getString("IdEmpresa");
-                cabecera.put("IdEmpresa", Objects.requireNonNullElse(idEmpresa, 0));
-
-                String tipoTicket = rs.getString("TipoTicket");
-                cabecera.put("TipoTicket", Objects.requireNonNullElse(tipoTicket, ""));
-
-                String idBalanzaMaestra = rs.getString("IdBalanzaMaestra");
-                cabecera.put("IdBalanzaMaestra", Objects.requireNonNullElse(idBalanzaMaestra, 0));
-
-                String numTicket = rs.getString("NumTicket");
-                cabecera.put("NumTicket", Objects.requireNonNullElse(numTicket, 0));
-
-                String idSeccion = rs.getString("IdSeccion");
-                cabecera.put("IdSeccion", Objects.requireNonNullElse(idSeccion, 0));
-
-                String idVendedor = rs.getString("IdVendedor");
-                cabecera.put("IdVendedor", Objects.requireNonNullElse(idVendedor, 0));
-
-                String idCliente = rs.getString("IdCliente");
-                cabecera.put("IdCliente", Objects.requireNonNullElse(idCliente, 0));
-
-                String numLineas = rs.getString("NumLineas");
-                cabecera.put("NumLineas", Objects.requireNonNullElse(numLineas, 0));
-
-                String importeTotal = rs.getString("ImporteTotal");
-                cabecera.put("ImporteTotal", Objects.requireNonNullElse(importeTotal, 0));
-
-                String fechaInicio = rs.getString("FechaInicio");
-                cabecera.put("FechaInicio", Objects.requireNonNullElse(fechaInicio, ""));
-
-                String fechaFin = rs.getString("FechaFin");
-                cabecera.put("FechaFin", Objects.requireNonNullElse(fechaFin, ""));
-
-                cabecera.put("bTIC_IdTicket", UUID.randomUUID().toString());
-
-                String id = rs.getString("idticket");
-
-
-                String insert = String.format("insert into [MBVic].[dbo].[bTIC_CabeceraTicket4] values " +
-                                "(%s,'%s', %s, %s, %s, %s, %s, %s, %s, '%s', '%s', 0, 0, '%s');",
-                        cabecera.getInt("IdEmpresa"),
-                        cabecera.getString("TipoTicket"),
-                        cabecera.getInt("IdBalanzaMaestra"),
-                        cabecera.getInt("NumTicket"),
-                        cabecera.getInt("IdSeccion"),
-                        cabecera.getInt("IdVendedor"),
-                        cabecera.getInt("IdCliente"),
-                        cabecera.getInt("NumLineas"),
-                        String.format("%.0f", Double.parseDouble(cabecera.getString("ImporteTotal")) * 100),
-                        cabecera.getString("FechaInicio"),
-                        cabecera.getString("FechaFin"),
-                        cabecera.getString("bTIC_IdTicket"));
-
-                System.out.println(insert);
-
-                stmt.executeUpdate("update sys_datos.dat_ticket_cabecera set Enviado = 2 where idticket = " + id + ";");
-
-
-                dbSql.insert(stmt2, insert);
-                String idTicket = cabecera.getString("bTIC_IdTicket");
-                scale.SelectLineas(idTicket);
-                scale.SelectFormaPago(idTicket);
-
-                stmt.executeUpdate("update sys_datos.dat_ticket_cabecera set Enviado = 1 where idticket = " + id + ";");
-
-            }
-            return 0;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return -1;
-    }
-
-    private void SelectFormaPago(String idTicket) {
-        try (Connection con = dbMysql.startConnection();
-             Statement stmt = con.createStatement();
-             Connection con2 = dbSql.startConnection();
-             Statement stmt2 = con2.createStatement()) {
-            ResultSet rs = dbMysql.getSelect(stmt, "SELECT d.`IdEmpresa`, d.`IdBalanzaMaestra`, d.`NumTicket`, d.`IdTienda`, (Select a.idVendedor from dat_ticket_cabecera a where a.idticket = d.idticket) as Vendedor, d.`IdFormaPago`, d.`ImporteFormaPago`, d.`Contado`, d.`TimeStamp`, d.`TimeStamp` as TimeStamp2 FROM dat_ticket_forma_pago d where (select Enviado from dat_ticket_cabecera a where a.idticket = d.idticket) = 2");
+            ResultSet rs = dbMysql.getSelect(stmt, String.format("""
+                    SELECT
+                        d.`IdEmpresa`,
+                        d.`IdBalanzaMaestra`,
+                        d.`NumTicket`,
+                        d.`IdTienda`,
+                        c.`IdVendedor`,
+                        d.`IdFormaPago`,
+                        d.`ImporteFormaPago`,
+                        d.`Contado`,
+                        d.`TimeStamp`,
+                        d.`TimeStamp` AS TimeStamp2
+                    FROM
+                        dat_ticket_forma_pago d
+                        join dat_ticket_cabecera c on c.idticket = d.idticket
+                        and c.idempresa = d.idempresa
+                    where
+                        c.`Enviado` = 1
+                        and c.`IdEmpresa` = %s
+                        and c.`idTicket` = %s
+                    """, idEmpresa, idMysql));
             while (rs.next()) {
                 JSONObject formaPago = new JSONObject();
-                String idEmpresa = rs.getString("IdEmpresa");
                 formaPago.put("IdEmpresa", Objects.requireNonNullElse(idEmpresa, 0));
 
                 String idBalanzaMaestra = rs.getString("IdBalanzaMaestra");
@@ -136,8 +138,8 @@ public class Scale {
                 String idTienda = rs.getString("IdTienda");
                 formaPago.put("IdTienda", Objects.requireNonNullElse(idTienda, 0));
 
-                String idVendedor = rs.getString("Vendedor");
-                formaPago.put("Vendedor", Objects.requireNonNullElse(idVendedor, 0));
+                String idVendedor = rs.getString("IdVendedor");
+                formaPago.put("IdVendedor", Objects.requireNonNullElse(idVendedor, 0));
 
                 String idFormaPago = rs.getString("IdFormaPago");
                 formaPago.put("IdFormaPago", Objects.requireNonNullElse(idFormaPago, 0));
@@ -160,7 +162,7 @@ public class Scale {
                         formaPago.getString("IdBalanzaMaestra"),
                         formaPago.getString("NumTicket"),
                         formaPago.getString("IdTienda"),
-                        formaPago.getString("Vendedor"),
+                        formaPago.getString("IdVendedor"),
                         formaPago.getString("IdFormaPago"),
                         formaPago.getString("ImporteFormaPago"),
                         formaPago.getString("Contado"),
@@ -176,16 +178,44 @@ public class Scale {
         }
     }
 
-    private void SelectLineas(String idTicket) {
+    private void SelectLineas(String idTicket, String idMysql, String idEmpresa) {
         try (Connection con = dbMysql.startConnection();
              Statement stmt = con.createStatement();
              Connection con2 = dbSql.startConnection();
              Statement stmt2 = con2.createStatement()) {
-            ResultSet rs = dbMysql.getSelect(stmt, "SELECT d.`IdEmpresa`, d.`IdBalanzaMaestra`, (select numticket from dat_ticket_cabecera a where a.idticket = d.idticket) as NumTicket, d.`IdDepartamento`, (Select a.idVendedor from dat_ticket_cabecera a where a.idticket = d.idticket) as Vendedor, d.`IdArticulo`, d.`IdFamilia`, d.`Cantidad2`, d.`Peso`, d.`Precio`, d.`Importe`, d.`RecargoEquivalencia`, d.`IdIVA`, d.`TextoLote`, d.`EstadoLinea`, d.`TimeStamp`, d.`TimeStamp` as TimeStamp2, d.Descuento, d.`Descuento` as Descuento2, d.`Descripcion` FROM dat_ticket_linea d where (select Enviado from dat_ticket_cabecera a where a.idticket = d.idticket) = 2");
+            ResultSet rs = dbMysql.getSelect(stmt, String.format("""
+                    SELECT
+                        d.`IdEmpresa`,
+                        d.`IdBalanzaMaestra`,
+                        c.`NumTicket`,
+                        d.`IdDepartamento`,
+                        c.`IdVendedor`,
+                        d.`IdArticulo`,
+                        d.`IdFamilia`,
+                        d.`Cantidad2`,
+                        d.`Peso`,
+                        d.`Precio`,
+                        d.`Importe`,
+                        d.`RecargoEquivalencia`,
+                        d.`IdIVA`,
+                        d.`TextoLote`,
+                        d.`EstadoLinea`,
+                        d.`TimeStamp`,
+                        d.`TimeStamp` as TimeStamp2,
+                        d.Descuento,
+                        d.`Descuento` as Descuento2,
+                        d.`Descripcion`,
+                        a.`IdTipo`
+                    FROM
+                        dat_ticket_linea d
+                        join dat_ticket_cabecera c on c.idticket = d.idticket
+                        and c.idempresa = d.idempresa
+                        join dat_articulo a on d.idarticulo = a.idarticulo
+                    where
+                        c.`Enviado` = 1 and c.`IdEmpresa` = %s and c.`idTicket` = %s""", idEmpresa, idMysql));
             while (rs.next()) {
                 JSONObject linea = new JSONObject();
 
-                String idEmpresa = rs.getString("IdEmpresa");
                 linea.put("IdEmpresa", Objects.requireNonNullElse(idEmpresa, 0));
 
                 String idBalanzaMaestra = rs.getString("IdBalanzaMaestra");
@@ -197,7 +227,7 @@ public class Scale {
                 String idDepartamento = rs.getString("IdDepartamento");
                 linea.put("IdDepartamento", Objects.requireNonNullElse(idDepartamento, 0));
 
-                String vendedor = rs.getString("Vendedor");
+                String vendedor = rs.getString("IdVendedor");
                 linea.put("Vendedor", Objects.requireNonNullElse(vendedor, 0));
 
                 String idArticulo = rs.getString("IdArticulo");
@@ -206,11 +236,16 @@ public class Scale {
                 String idFamilia = rs.getString("IdFamilia");
                 linea.put("IdFamilia", Objects.requireNonNullElse(idFamilia, 0));
 
-                String cantidad2 = rs.getString("Cantidad2");
+                String cantidad2 = rs.getString("Peso");
                 linea.put("Cantidad2", Objects.requireNonNullElse(cantidad2, 0));
 
-                String peso = rs.getString("Peso");
-                linea.put("Peso", Objects.requireNonNullElse(peso, 0));
+                if (rs.getString("IdTipo").equals("2")) {
+                    String peso = "0";
+                    linea.put("Peso", peso);
+                } else {
+                    String peso = rs.getString("Peso");
+                    linea.put("Peso", Objects.requireNonNullElse(peso, 0));
+                }
 
                 String precio = rs.getString("Precio");
                 linea.put("Precio", Objects.requireNonNullElse(precio, 0));
@@ -259,8 +294,8 @@ public class Scale {
                         linea.getInt("Vendedor"),
                         linea.getInt("IdArticulo"),
                         linea.getInt("IdFamilia"),
-                        linea.getInt("Cantidad2"),
-                        linea.getDouble("Peso"),
+                        linea.getString("Cantidad2"),
+                        String.format("%s",linea.getDouble("Peso") * 1000),
                         linea.getDouble("Precio"),
                         linea.getDouble("Importe"),
                         linea.getDouble("RecargoEquivalencia"),
