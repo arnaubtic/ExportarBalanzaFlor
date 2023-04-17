@@ -1,16 +1,17 @@
 package org.example;
 
 import java.sql.*;
+
 public class dbMysql {
-    private static final String ip = "10.10.139.191";
-    private static final String port = "3306";
-    private static final String database = "sys_datos";
-    private static final String username = "user";
-    private static final String password = "dibal";
-    private static final String url = "jdbc:mysql://" + ip + ":" + port + "/" + database;
+    static String ip;
+    static String port;
+    static String database;
+    static String username;
+    static String password;
 
     //Estableix connexió amb ddbb
     public static Connection startConnection() throws SQLException {
+        String url = "jdbc:mysql://" + ip + ":" + port + "/" + database;
         return DriverManager.getConnection(url, username, password);
     }
 

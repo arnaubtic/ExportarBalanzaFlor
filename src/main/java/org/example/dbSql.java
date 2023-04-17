@@ -2,7 +2,7 @@ package org.example;
 
 import java.sql.*;
 public class dbSql {
-    private static final String ip = "10.10.139.51";
+    private static final String ip = "SRVSAGE";
     private static final String port = "64952";
     private static final String database = "MBVic";
     private static final String username = "logic";

@@ -1,9 +1,15 @@
 package org.example;
 
+
 import org.json.JSONObject;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Locale;
+import java.util.Objects;
+import java.util.UUID;
 
 
 public class Scale {
@@ -13,18 +19,57 @@ public class Scale {
         Locale.setDefault(Locale.ENGLISH);
         scale = new Scale();
 
-        try (Connection con = dbMysql.startConnection();
-             Statement stmt = con.createStatement();
-             Statement stUpdate = con.createStatement();
-             Connection con2 = dbSql.startConnection();
-             Statement stInsert = con2.createStatement()) {
-            ResultSet rs = dbMysql.getSelect(stmt,
-                    "select IdEmpresa, Tipo as TipoTicket, IdBalanzaMaestra, NumTicket, IdSeccion, IdVendedor, " +
-                            "IdCliente, NumLineas,ImporteTotal, Fecha as FechaInicio, Fecha as FechaFin, " +
-                            "0 as StatusTraspasado, idticket from sys_datos.dat_ticket_cabecera where Enviado = 0");
+        try (Connection con1 = dbSql.startConnection();
+             Statement stmt1 = con1.createStatement()) {
+            ResultSet rs1 = dbSql.getSelect(stmt1, "Select * from btic_ConnexionsDibal");
+            while (rs1.next()) {
+                dbMysql.ip = rs1.getString("btic_Ip");
+                dbMysql.port = rs1.getString("btic_port");
+                dbMysql.database = rs1.getString("btic_database");
+                dbMysql.username = rs1.getString("btic_username");
+                dbMysql.password = rs1.getString("btic_password");
 
-            while (rs.next()) {
-                System.out.println("IDTICKET: " + scale.SelectCabecera(rs, stUpdate, stInsert));
+                System.out.println("IP: " + dbMysql.ip);
+                System.out.println("Port: " + dbMysql.port);
+                System.out.println("Database: " + dbMysql.database);
+                System.out.println("Username: " + dbMysql.username);
+                System.out.println("Password: " + dbMysql.password);
+                System.out.println("Tienda: " + rs1.getString("btic_idtienda"));
+                System.out.println("====================================");
+
+                try (Connection con = dbMysql.startConnection(); Statement stmt = con.createStatement();
+                     Statement stUpdate = con.createStatement(); Connection con2 = dbSql.startConnection();
+                     Statement stInsert = con2.createStatement()) {
+                    ResultSet rs = dbMysql.getSelect(stmt, """
+                            SELECT
+                                c.IdEmpresa,
+                                c.Tipo as TipoTicket,
+                                c.IdBalanzaMaestra,
+                                c.IdTicket,
+                                c.IdSeccion,
+                                c.IdVendedor,
+                                c.IdCliente,
+                                c.NumLineas,
+                                c.ImporteTotal,
+                                c.Fecha as FechaInicio,
+                                c.Fecha as FechaFin,
+                                0 as StatusTraspasado,
+                                c.idticket,
+                                l.Comportamiento
+                            FROM
+                                sys_datos.dat_ticket_cabecera c
+                            JOIN dat_ticket_linea l ON c.IdTicket = l.IdTicket
+                            WHERE c.Enviado = 0
+                            """);
+
+                    while (rs.next()) {
+                        System.out.println("IDTICKET: " + scale.SelectCabecera(rs, stUpdate, stInsert, rs1.getInt("btic_IdTienda")));
+                    }
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                System.out.println("====================================");
+
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -32,7 +77,7 @@ public class Scale {
 
     }
 
-    private String SelectCabecera(ResultSet rs, Statement stupdate, Statement stinsert) throws SQLException {
+    private String SelectCabecera(ResultSet rs, Statement stupdate, Statement stinsert, int codigoTienda) throws SQLException {
 
         JSONObject cabecera = new JSONObject();
         //comprobar si idempresa es null, si es null poner 0
@@ -40,13 +85,15 @@ public class Scale {
         cabecera.put("IdEmpresa", Objects.requireNonNullElse(idEmpresa, 0));
 
         String tipoTicket = rs.getString("TipoTicket");
+        int comportamiento = rs.getInt("Comportamiento");
+        if (comportamiento == 1) tipoTicket = "D";
         cabecera.put("TipoTicket", Objects.requireNonNullElse(tipoTicket, ""));
 
         String idBalanzaMaestra = rs.getString("IdBalanzaMaestra");
         cabecera.put("IdBalanzaMaestra", Objects.requireNonNullElse(idBalanzaMaestra, 0));
 
-        String numTicket = rs.getString("NumTicket");
-        cabecera.put("NumTicket", Objects.requireNonNullElse(numTicket, 0));
+        String numTicket = rs.getString("IdTicket");
+        cabecera.put("IdTicket", Objects.requireNonNullElse(numTicket, 0));
 
         String idSeccion = rs.getString("IdSeccion");
         cabecera.put("IdSeccion", Objects.requireNonNullElse(idSeccion, 0));
@@ -75,40 +122,30 @@ public class Scale {
 
 
         String insert = String.format("insert into [MBVic].[dbo].[bTIC_CabeceraTicket4] values " +
-                        "(%s,'%s', %s, %s, %s, %s, %s, %s, %s, '%s', '%s', 0, 0, '%s');",
-                cabecera.getInt("IdEmpresa"),
-                cabecera.getString("TipoTicket"),
-                cabecera.getInt("IdBalanzaMaestra"),
-                cabecera.getInt("NumTicket"),
-                cabecera.getInt("IdSeccion"),
-                cabecera.getInt("IdVendedor"),
-                cabecera.getInt("IdCliente"),
-                cabecera.getInt("NumLineas"),
-                String.format("%.0f", Double.parseDouble(cabecera.getString("ImporteTotal")) * 100),
-                cabecera.getString("FechaInicio"),
-                cabecera.getString("FechaFin"),
-                cabecera.getString("bTIC_IdTicket"));
+                                      "(%s,'%s', %s, %s, %s, %s, %s, %s, %s, '%s', '%s', 0, 0, '%s');",
+                cabecera.getInt("IdEmpresa"), cabecera.getString("TipoTicket"), cabecera.getInt("IdBalanzaMaestra"),
+                cabecera.getInt("IdTicket"), codigoTienda, cabecera.getInt("IdVendedor"),
+                cabecera.getInt("IdCliente"), cabecera.getInt("NumLineas"),
+                String.format("%.0f", Math.abs(Double.parseDouble(cabecera.getString("ImporteTotal")) * 100)),
+                cabecera.getString("FechaInicio"), cabecera.getString("FechaFin"), cabecera.getString("bTIC_IdTicket"));
 
-        System.out.println(insert);
+        //System.out.println(insert);
         dbSql.insert(stinsert, insert);
 
         dbMysql.update(stupdate, "update sys_datos.dat_ticket_cabecera set Enviado = 1 where idticket = " + id);
         String idTicket = cabecera.getString("bTIC_IdTicket");
-        scale.SelectLineas(idTicket, id, idEmpresa);
-        scale.SelectFormaPago(idTicket, id, idEmpresa);
+        scale.SelectLineas(idTicket, id, idEmpresa, codigoTienda);
+        scale.SelectFormaPago(idTicket, id, idEmpresa, codigoTienda);
         return idTicket;
     }
 
-    private void SelectFormaPago(String idTicket, String idMysql, String idEmpresa) {
-        try (Connection con = dbMysql.startConnection();
-             Statement stmt = con.createStatement();
-             Connection con2 = dbSql.startConnection();
-             Statement stmt2 = con2.createStatement()) {
+    private void SelectFormaPago(String idTicket, String idMysql, String idEmpresa, int codigoTienda) {
+        try (Connection con = dbMysql.startConnection(); Statement stmt = con.createStatement(); Connection con2 = dbSql.startConnection(); Statement stmt2 = con2.createStatement()) {
             ResultSet rs = dbMysql.getSelect(stmt, String.format("""
                     SELECT
                         d.`IdEmpresa`,
                         d.`IdBalanzaMaestra`,
-                        d.`NumTicket`,
+                        d.`IdTicket`,
                         d.`IdTienda`,
                         c.`IdVendedor`,
                         d.`IdFormaPago`,
@@ -132,8 +169,8 @@ public class Scale {
                 String idBalanzaMaestra = rs.getString("IdBalanzaMaestra");
                 formaPago.put("IdBalanzaMaestra", Objects.requireNonNullElse(idBalanzaMaestra, 0));
 
-                String numTicket = rs.getString("NumTicket");
-                formaPago.put("NumTicket", Objects.requireNonNullElse(numTicket, 0));
+                String numTicket = rs.getString("IdTicket");
+                formaPago.put("IdTicket", Objects.requireNonNullElse(numTicket, 0));
 
                 String idTienda = rs.getString("IdTienda");
                 formaPago.put("IdTienda", Objects.requireNonNullElse(idTienda, 0));
@@ -141,11 +178,20 @@ public class Scale {
                 String idVendedor = rs.getString("IdVendedor");
                 formaPago.put("IdVendedor", Objects.requireNonNullElse(idVendedor, 0));
 
-                String idFormaPago = rs.getString("IdFormaPago");
-                formaPago.put("IdFormaPago", Objects.requireNonNullElse(idFormaPago, 0));
+                int idFormaPago = rs.getInt("IdFormaPago");
 
-                String importeFormaPago = rs.getString("ImporteFormaPago");
-                formaPago.put("ImporteFormaPago", Objects.requireNonNullElse(importeFormaPago, 0));
+                //Querry para buscar forma de pago en la tabla de formas de pago
+                String formaPagoBiz = String.format("select btic_CodigoBiz from [MBVic].[dbo].[bTIC_FormaPagoBalanza] where btic_FormaPago = %s", idFormaPago);
+                ResultSet rs2 = dbSql.getSelect(stmt2, formaPagoBiz);
+                while (rs2.next())
+                    idFormaPago = rs2.getInt("btic_CodigoBiz");
+
+                formaPago.put("IdFormaPago", idFormaPago);
+
+
+                double importeFormaPago = rs.getDouble("ImporteFormaPago");
+                formaPago.put("ImporteFormaPago", Math.abs(importeFormaPago));
+
 
                 String contado = rs.getString("Contado");
                 formaPago.put("Contado", Objects.requireNonNullElse(contado, 0));
@@ -157,19 +203,12 @@ public class Scale {
                 formaPago.put("TimeStamp2", Objects.requireNonNullElse(timeStamp2, ""));
 
                 String insert = String.format("insert into [MBVic].[dbo].[bTIC_FormaPagTicket4] " +
-                                "values (%s, %s, %s, %s, %s, %s, %s, %s, '%s', '%s', NEWID(), '%s');",
-                        formaPago.getString("IdEmpresa"),
-                        formaPago.getString("IdBalanzaMaestra"),
-                        formaPago.getString("NumTicket"),
-                        formaPago.getString("IdTienda"),
-                        formaPago.getString("IdVendedor"),
-                        formaPago.getString("IdFormaPago"),
-                        formaPago.getString("ImporteFormaPago"),
-                        formaPago.getString("Contado"),
-                        formaPago.getString("TimeStamp"),
-                        formaPago.getString("TimeStamp2"),
-                        idTicket);
-                System.out.println(insert);
+                                              "values (%s, %s, %s, %s, %s, %s, %s, %s, '%s', '%s', NEWID(), '%s');",
+                        formaPago.getString("IdEmpresa"), formaPago.getString("IdBalanzaMaestra"), formaPago.getString("IdTicket"),
+                        codigoTienda, formaPago.getString("IdVendedor"), formaPago.getInt("IdFormaPago"),
+                        formaPago.getDouble("ImporteFormaPago"), formaPago.getString("Contado"), formaPago.getString("TimeStamp"),
+                        formaPago.getString("TimeStamp2"), idTicket);
+                //System.out.println(insert);
 
                 dbSql.insert(stmt2, insert);
             }
@@ -178,16 +217,13 @@ public class Scale {
         }
     }
 
-    private void SelectLineas(String idTicket, String idMysql, String idEmpresa) {
-        try (Connection con = dbMysql.startConnection();
-             Statement stmt = con.createStatement();
-             Connection con2 = dbSql.startConnection();
-             Statement stmt2 = con2.createStatement()) {
+    private void SelectLineas(String idTicket, String idMysql, String idEmpresa, int codigoTienda) {
+        try (Connection con = dbMysql.startConnection(); Statement stmt = con.createStatement(); Connection con2 = dbSql.startConnection(); Statement stmt2 = con2.createStatement()) {
             ResultSet rs = dbMysql.getSelect(stmt, String.format("""
                     SELECT
                         d.`IdEmpresa`,
                         d.`IdBalanzaMaestra`,
-                        c.`NumTicket`,
+                        c.`IdTicket`,
                         d.`IdDepartamento`,
                         c.`IdVendedor`,
                         d.`IdArticulo`,
@@ -221,8 +257,8 @@ public class Scale {
                 String idBalanzaMaestra = rs.getString("IdBalanzaMaestra");
                 linea.put("IdBalanzaMaestra", Objects.requireNonNullElse(idBalanzaMaestra, 0));
 
-                String numTicket = rs.getString("NumTicket");
-                linea.put("NumTicket", Objects.requireNonNullElse(numTicket, 0));
+                String numTicket = rs.getString("IdTicket");
+                linea.put("IdTicket", Objects.requireNonNullElse(numTicket, 0));
 
                 String idDepartamento = rs.getString("IdDepartamento");
                 linea.put("IdDepartamento", Objects.requireNonNullElse(idDepartamento, 0));
@@ -236,8 +272,8 @@ public class Scale {
                 String idFamilia = rs.getString("IdFamilia");
                 linea.put("IdFamilia", Objects.requireNonNullElse(idFamilia, 0));
 
-                String cantidad2 = rs.getString("Peso");
-                linea.put("Cantidad2", Objects.requireNonNullElse(cantidad2, 0));
+                double cantidad2 = rs.getDouble("Peso");
+                linea.put("Cantidad2", cantidad2);
 
                 if (rs.getString("IdTipo").equals("2")) {
                     String peso = "0";
@@ -286,30 +322,18 @@ public class Scale {
                 }
 
                 String insert = String.format("insert into [MBVic].[dbo].[bTIC_LineasTicket4] " +
-                                "values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, '%s', %s, '%s', '%s', %s, %s, '%s', '%s', '%s')",
-                        linea.getInt("IdEmpresa"),
-                        linea.getInt("IdBalanzaMaestra"),
-                        linea.getInt("NumTicket"),
-                        linea.getInt("IdDepartamento"),
-                        linea.getInt("Vendedor"),
-                        linea.getInt("IdArticulo"),
-                        linea.getInt("IdFamilia"),
-                        linea.getString("Cantidad2"),
-                        String.format("%s",linea.getDouble("Peso") * 1000),
-                        linea.getDouble("Precio"),
-                        linea.getDouble("Importe"),
-                        linea.getDouble("RecargoEquivalencia"),
-                        linea.getInt("IdIVA"),
-                        linea.getString("TextoLote"),
-                        linea.getString("EstadoLinea"),
-                        linea.getString("TimeStamp"),
-                        linea.getString("TimeStamp2"),
-                        String.format("%.2f", linea.getDouble("Descuento") * linea.getDouble("Precio")),
-                        String.format("%.2f", linea.getDouble("Descuento2")),
-                        linea.getString("Descripcion"),
-                        linea.getString("LineasPosicion"),
-                        idTicket);
-                System.out.println(insert);
+                                              "values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, '%s', %s, '%s', '%s', %s, %s, '%s', '%s', '%s')",
+                        linea.getInt("IdEmpresa"), linea.getInt("IdBalanzaMaestra"), linea.getInt("IdTicket"),
+                        codigoTienda, linea.getInt("Vendedor"), linea.getInt("IdArticulo"),
+                        linea.getInt("IdFamilia"), Math.abs(linea.getDouble("Cantidad2")),
+                        String.format("%s", Math.abs(linea.getDouble("Peso")) * 1000), Math.abs(linea.getDouble("Precio")),
+                        Math.abs(linea.getDouble("Importe")), Math.abs(linea.getDouble("RecargoEquivalencia")),
+                        linea.getInt("IdIVA"), linea.getString("TextoLote"),
+                        linea.getString("EstadoLinea"), linea.getString("TimeStamp"),
+                        linea.getString("TimeStamp2"), String.format("%.2f", linea.getDouble("Descuento") * linea.getDouble("Precio")),
+                        String.format("%.2f", linea.getDouble("Descuento2")), linea.getString("Descripcion"),
+                        linea.getString("LineasPosicion"), idTicket);
+                //System.out.println(insert);
                 dbSql.insert(stmt2, insert);
             }
         } catch (Exception e) {
