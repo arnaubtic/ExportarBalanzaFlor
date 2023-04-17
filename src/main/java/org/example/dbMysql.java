@@ -20,11 +20,7 @@ public class dbMysql {
         return stmt.executeQuery(condicio);
     }
 
-    public static int insert(Statement stmt, String condicio) throws SQLException {
-        return stmt.executeUpdate(condicio);
-    }
-
-    public static int update(Statement stmt, String condicio) throws SQLException {
-        return stmt.executeUpdate(condicio);
+    public static void update(Statement stmt, String condicio) throws SQLException {
+        stmt.executeUpdate(condicio);
     }
 }
