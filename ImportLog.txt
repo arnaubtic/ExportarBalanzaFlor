@@ -1,0 +1,636 @@
++-----------------+-----------------+-----------------+
+|Fecha importación: Mon Apr 17 12:58:04 CEST 2023      |
++-----------------+-----------------+-----------------+
+| IP              | Port            | Database        |
+| 10.10.139.191   | 3306            | sys_datos       |
++-----------------+-----------------+-----------------+
+| Username        | Tienda          |                 |
+| user            | 1               |                 |
++-----------------+-----------------+-----------------+
+|IDTICKET: 2                                          |
+|TIPO: T                                              |
+|NUM LINEAS: 3                                        |
+|IMPORTETOTAL: 47.640                                 |
+|FECHA INICIO: 2023-04-11 09:29:24.0                  |
+|TICKED GUID: 33dac1bd-dd72-4dba-a8b3-6d965b9dea91    |
++-----------------------------------------------------+
+|IDTICKET: 2                                          |
+|TIPO: T                                              |
+|NUM LINEAS: 3                                        |
+|IMPORTETOTAL: 47.640                                 |
+|FECHA INICIO: 2023-04-11 09:29:24.0                  |
+|TICKED GUID: 7528f07c-2655-4822-a67e-7d540d88e6c9    |
++-----------------------------------------------------+
+|IDTICKET: 2                                          |
+|TIPO: T                                              |
+|NUM LINEAS: 3                                        |
+|IMPORTETOTAL: 47.640                                 |
+|FECHA INICIO: 2023-04-11 09:29:24.0                  |
+|TICKED GUID: a16dfeaa-04ac-44dc-b48d-cd53b0c3ac50    |
++-----------------------------------------------------+
+|IDTICKET: 4                                          |
+|TIPO: D                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: -10.500                                |
+|FECHA INICIO: 2023-04-11 09:54:45.0                  |
+|TICKED GUID: 155f25b5-eb82-489c-b1c6-a40d439dc264    |
++-----------------------------------------------------+
+|IDTICKET: 5                                          |
+|TIPO: D                                              |
+|NUM LINEAS: 2                                        |
+|IMPORTETOTAL: -10.400                                |
+|FECHA INICIO: 2023-04-11 10:12:59.0                  |
+|TICKED GUID: 361bd8b2-6956-4374-8932-f1f5b71ea253    |
++-----------------------------------------------------+
+|IDTICKET: 5                                          |
+|TIPO: R                                              |
+|NUM LINEAS: 2                                        |
+|IMPORTETOTAL: -10.400                                |
+|FECHA INICIO: 2023-04-11 10:12:59.0                  |
+|TICKED GUID: 3e9a1aaf-900a-4d95-a63e-ead4e10a6cf3    |
++-----------------------------------------------------+
+|IDTICKET: 6                                          |
+|TIPO: D                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: 10.500                                 |
+|FECHA INICIO: 2023-04-11 10:13:01.0                  |
+|TICKED GUID: e7e5b4b8-8aab-4fea-aae4-647f6d352286    |
++-----------------------------------------------------+
+|IDTICKET: 8                                          |
+|TIPO: D                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: -0.100                                 |
+|FECHA INICIO: 2023-04-11 10:43:50.0                  |
+|TICKED GUID: 2b0c87e2-1021-4264-a231-266d14eb207b    |
++-----------------------------------------------------+
+|IDTICKET: 10                                         |
+|TIPO: D                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: -10.500                                |
+|FECHA INICIO: 2023-04-11 10:50:16.0                  |
+|TICKED GUID: 7348696a-4ae7-4b69-8605-de274612c833    |
++-----------------------------------------------------+
+|IDTICKET: 12                                         |
+|TIPO: D                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: -15.500                                |
+|FECHA INICIO: 2023-04-11 10:51:35.0                  |
+|TICKED GUID: 7394c6a8-75b1-46f1-93fc-7880402e09b3    |
++-----------------------------------------------------+
+|IDTICKET: 13                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: 6.000                                  |
+|FECHA INICIO: 2023-04-11 10:54:12.0                  |
+|TICKED GUID: 4d85c4fa-999f-4997-b440-ba4f9d1b9e66    |
++-----------------------------------------------------+
+|IDTICKET: 14                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: 6.050                                  |
+|FECHA INICIO: 2023-04-11 10:54:37.0                  |
+|TICKED GUID: 8a266fb1-966c-4a79-b110-28187e17a0e7    |
++-----------------------------------------------------+
+|IDTICKET: 15                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: 11.400                                 |
+|FECHA INICIO: 2023-04-11 11:16:58.0                  |
+|TICKED GUID: 4a941736-447e-4b22-9c7a-2f7267a368b4    |
++-----------------------------------------------------+
+|IDTICKET: 16                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: 6.050                                  |
+|FECHA INICIO: 2023-04-11 11:18:03.0                  |
+|TICKED GUID: ae80676b-c2aa-46d0-9463-3f65d77fd1ae    |
++-----------------------------------------------------+
+|IDTICKET: 17                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: 13.100                                 |
+|FECHA INICIO: 2023-04-11 11:18:44.0                  |
+|TICKED GUID: c66f0e23-1e77-4e32-88d4-dd17d2c3925b    |
++-----------------------------------------------------+
+|IDTICKET: 21                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: 8.750                                  |
+|FECHA INICIO: 2023-04-11 11:45:30.0                  |
+|TICKED GUID: 52a6c2cb-4044-4697-aec1-3884e4fca1d1    |
++-----------------------------------------------------+
+|IDTICKET: 23                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: 17.500                                 |
+|FECHA INICIO: 2023-04-11 11:47:29.0                  |
+|TICKED GUID: 19b2bda5-cd19-4252-a49b-8ce6c0d67519    |
++-----------------------------------------------------+
+|IDTICKET: 24                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 2                                        |
+|IMPORTETOTAL: 23.250                                 |
+|FECHA INICIO: 2023-04-11 12:24:35.0                  |
+|TICKED GUID: d1735c30-c551-405d-8e38-5dd71ddd905e    |
++-----------------------------------------------------+
+|IDTICKET: 24                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 2                                        |
+|IMPORTETOTAL: 23.250                                 |
+|FECHA INICIO: 2023-04-11 12:24:35.0                  |
+|TICKED GUID: ea34ff40-84a6-4aa1-895f-e58f3f5e7734    |
++-----------------------------------------------------+
+|IDTICKET: 25                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: 0.100                                  |
+|FECHA INICIO: 2023-04-11 12:45:40.0                  |
+|TICKED GUID: be9a443d-1e67-48b3-bc70-52f2578b800c    |
++-----------------------------------------------------+
+|IDTICKET: 28                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: 0.140                                  |
+|FECHA INICIO: 2023-04-11 12:43:10.0                  |
+|TICKED GUID: 8638f258-86c9-415b-b40a-d44b66d13ab3    |
++-----------------------------------------------------+
+|IDTICKET: 33                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 2                                        |
+|IMPORTETOTAL: 23.850                                 |
+|FECHA INICIO: 2023-04-11 12:59:01.0                  |
+|TICKED GUID: cc85dbbb-de6a-429c-a493-57cbaaa5924b    |
++-----------------------------------------------------+
+|IDTICKET: 33                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 2                                        |
+|IMPORTETOTAL: 23.850                                 |
+|FECHA INICIO: 2023-04-11 12:59:01.0                  |
+|TICKED GUID: acb2eec7-fed7-43e6-9d65-21ae330a0563    |
++-----------------------------------------------------+
+|IDTICKET: 36                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: 10.500                                 |
+|FECHA INICIO: 2023-04-12 09:34:18.0                  |
+|TICKED GUID: 245c61cf-d392-4d94-bd81-7d9067c8e341    |
++-----------------------------------------------------+
+|IDTICKET: 37                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: 10.500                                 |
+|FECHA INICIO: 2023-04-12 09:35:26.0                  |
+|TICKED GUID: f9f255ec-c09f-4148-8da2-bea2d04989b9    |
++-----------------------------------------------------+
+|IDTICKET: 47                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 4                                        |
+|IMPORTETOTAL: 48.420                                 |
+|FECHA INICIO: 2023-04-17 10:11:14.0                  |
+|TICKED GUID: d8c63a4e-258d-412c-bc90-6c1a1e73d06a    |
++-----------------------------------------------------+
+|IDTICKET: 47                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 4                                        |
+|IMPORTETOTAL: 48.420                                 |
+|FECHA INICIO: 2023-04-17 10:11:14.0                  |
+|TICKED GUID: 640533a3-13a8-4af3-9889-a4c2c357cf6f    |
++-----------------------------------------------------+
+|IDTICKET: 47                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 4                                        |
+|IMPORTETOTAL: 48.420                                 |
+|FECHA INICIO: 2023-04-17 10:11:14.0                  |
+|TICKED GUID: 35812499-f92b-4fb8-8ba0-fe28c5479cea    |
++-----------------------------------------------------+
+|IDTICKET: 47                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 4                                        |
+|IMPORTETOTAL: 48.420                                 |
+|FECHA INICIO: 2023-04-17 10:11:14.0                  |
+|TICKED GUID: a96c6148-9443-4dce-bd34-4802fa9be505    |
++-----------------------------------------------------+
+|IDTICKET: 50                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 2                                        |
+|IMPORTETOTAL: 17.950                                 |
+|FECHA INICIO: 2023-04-17 10:11:43.0                  |
+|TICKED GUID: da879ac6-cd21-4321-8407-f06cea634067    |
++-----------------------------------------------------+
+|IDTICKET: 50                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 2                                        |
+|IMPORTETOTAL: 17.950                                 |
+|FECHA INICIO: 2023-04-17 10:11:43.0                  |
+|TICKED GUID: 8de9636d-c649-4d4a-8eb4-f5da165fb862    |
++-----------------------------------------------------+
+|IDTICKET: 51                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 2                                        |
+|IMPORTETOTAL: 26.250                                 |
+|FECHA INICIO: 2023-04-17 10:10:49.0                  |
+|TICKED GUID: de477ec8-ce82-4f17-9377-f5838851a556    |
++-----------------------------------------------------+
+|IDTICKET: 51                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 2                                        |
+|IMPORTETOTAL: 26.250                                 |
+|FECHA INICIO: 2023-04-17 10:10:49.0                  |
+|TICKED GUID: 6b30ac6d-45ae-40c5-b19c-25cdc4cd928c    |
++-----------------------------------------------------+
+|IDTICKET: 52                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: 11.880                                 |
+|FECHA INICIO: 2023-04-17 10:10:58.0                  |
+|TICKED GUID: c1d2b7ea-15f1-44a3-845f-fa523f236ed8    |
++-----------------------------------------------------+
+|IDTICKET: 53                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: 3.340                                  |
+|FECHA INICIO: 2023-04-17 10:11:51.0                  |
+|TICKED GUID: 88a70602-2a18-4f0c-bad0-f28a02d30ff4    |
++-----------------------------------------------------+
+|IDTICKET: 55                                         |
+|TIPO: D                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: -105.000                               |
+|FECHA INICIO: 2023-04-17 11:54:30.0                  |
+|TICKED GUID: f94baef8-fd99-45a3-9cb2-837f0754b9f6    |
++-----------------------------------------------------+
+|IDTICKET: 56                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: 15.500                                 |
+|FECHA INICIO: 2023-04-17 12:02:43.0                  |
+|TICKED GUID: ce90c847-5910-4096-9de5-f2c9abee0aae    |
++-----------------------------------------------------+
+|IDTICKET: 57                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: 32.340                                 |
+|FECHA INICIO: 2023-04-17 12:02:49.0                  |
+|TICKED GUID: 80979adb-7017-4053-b7f3-17af5fd62c0a    |
++-----------------------------------------------------+
+|IDTICKET: 61                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: 20.250                                 |
+|FECHA INICIO: 2023-04-17 12:02:29.0                  |
+|TICKED GUID: e95843a6-abae-49aa-a33d-6f8a1bbe237e    |
++-----------------------------------------------------+
+|IDTICKET: 63                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: 42.500                                 |
+|FECHA INICIO: 2023-04-17 12:02:34.0                  |
+|TICKED GUID: 81aacf92-3b61-4c54-b2c1-8f4f6ad99cfd    |
++-----------------------------------------------------+
+|IDTICKET: 64                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: 24.550                                 |
+|FECHA INICIO: 2023-04-17 12:02:22.0                  |
+|TICKED GUID: 947e0488-347b-461e-a3e3-34143d0be50c    |
++-----------------------------------------------------+
+|IDTICKET: 65                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: 13.950                                 |
+|FECHA INICIO: 2023-04-17 12:02:15.0                  |
+|TICKED GUID: 743e9a83-6664-4ef8-93ac-2b679fcc3199    |
++-----------------------------------------------------+
+|IDTICKET: 66                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 2                                        |
+|IMPORTETOTAL: 20.570                                 |
+|FECHA INICIO: 2023-04-17 12:06:54.0                  |
+|TICKED GUID: 09c22b86-a27f-4978-b69a-3b3e146a35dd    |
++-----------------------------------------------------+
+|IDTICKET: 66                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 2                                        |
+|IMPORTETOTAL: 20.570                                 |
+|FECHA INICIO: 2023-04-17 12:06:54.0                  |
+|TICKED GUID: 4a0eb478-49ba-40c6-a1e9-bd215e267953    |
++-----------------------------------------------------+
+=================================================
++-----------------+-----------------+-----------------+
+|Fecha importación: Mon Apr 17 12:59:07 CEST 2023     |
++-----------------+-----------------+-----------------+
+| IP              | Port            | Database        |
+| 10.10.139.191   | 3306            | sys_datos       |
++-----------------+-----------------+-----------------+
+| Username        | Tienda          |                 |
+| user            | 1               |                 |
++-----------------+-----------------+-----------------+
+|IDTICKET: 2                                          |
+|TIPO: T                                              |
+|NUM LINEAS: 3                                        |
+|IMPORTETOTAL: 47.640                                 |
+|FECHA INICIO: 2023-04-11 09:29:24.0                  |
+|TICKED GUID: 8d104f81-2386-46a8-9bd4-b4dcb724e092    |
++-----------------------------------------------------+
+|IDTICKET: 2                                          |
+|TIPO: T                                              |
+|NUM LINEAS: 3                                        |
+|IMPORTETOTAL: 47.640                                 |
+|FECHA INICIO: 2023-04-11 09:29:24.0                  |
+|TICKED GUID: f903d08b-4a74-40e3-9862-6a21b2c0f43b    |
++-----------------------------------------------------+
+|IDTICKET: 2                                          |
+|TIPO: T                                              |
+|NUM LINEAS: 3                                        |
+|IMPORTETOTAL: 47.640                                 |
+|FECHA INICIO: 2023-04-11 09:29:24.0                  |
+|TICKED GUID: 261cfa29-1fd5-4439-bae4-90df1a995074    |
++-----------------------------------------------------+
+|IDTICKET: 4                                          |
+|TIPO: D                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: -10.500                                |
+|FECHA INICIO: 2023-04-11 09:54:45.0                  |
+|TICKED GUID: 1293577b-b96a-4a5f-b4a2-0ca36a454672    |
++-----------------------------------------------------+
+|IDTICKET: 5                                          |
+|TIPO: D                                              |
+|NUM LINEAS: 2                                        |
+|IMPORTETOTAL: -10.400                                |
+|FECHA INICIO: 2023-04-11 10:12:59.0                  |
+|TICKED GUID: a31f7829-5eb2-4e67-8eb4-cc6d784d36db    |
++-----------------------------------------------------+
+|IDTICKET: 5                                          |
+|TIPO: R                                              |
+|NUM LINEAS: 2                                        |
+|IMPORTETOTAL: -10.400                                |
+|FECHA INICIO: 2023-04-11 10:12:59.0                  |
+|TICKED GUID: 5705879d-c982-4faa-b0e3-9d3f92c57353    |
++-----------------------------------------------------+
+|IDTICKET: 6                                          |
+|TIPO: D                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: 10.500                                 |
+|FECHA INICIO: 2023-04-11 10:13:01.0                  |
+|TICKED GUID: 40ec530c-70ee-44fe-9026-9f4f469dcba5    |
++-----------------------------------------------------+
+|IDTICKET: 8                                          |
+|TIPO: D                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: -0.100                                 |
+|FECHA INICIO: 2023-04-11 10:43:50.0                  |
+|TICKED GUID: 718810bf-ba53-4fc5-8c60-afae1067442b    |
++-----------------------------------------------------+
+|IDTICKET: 10                                         |
+|TIPO: D                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: -10.500                                |
+|FECHA INICIO: 2023-04-11 10:50:16.0                  |
+|TICKED GUID: 061be139-e0ea-455f-9e6b-30a64e79d65d    |
++-----------------------------------------------------+
+|IDTICKET: 12                                         |
+|TIPO: D                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: -15.500                                |
+|FECHA INICIO: 2023-04-11 10:51:35.0                  |
+|TICKED GUID: be34d36e-641f-4671-905a-17418787d87f    |
++-----------------------------------------------------+
+|IDTICKET: 13                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: 6.000                                  |
+|FECHA INICIO: 2023-04-11 10:54:12.0                  |
+|TICKED GUID: 5301f238-f488-4ee7-8790-1d07ef60b164    |
++-----------------------------------------------------+
+|IDTICKET: 14                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: 6.050                                  |
+|FECHA INICIO: 2023-04-11 10:54:37.0                  |
+|TICKED GUID: dbe55adf-deb8-4a61-90eb-9c44225b6cd6    |
++-----------------------------------------------------+
+|IDTICKET: 15                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: 11.400                                 |
+|FECHA INICIO: 2023-04-11 11:16:58.0                  |
+|TICKED GUID: 895defe2-59d4-42c3-8384-4f9df99831d7    |
++-----------------------------------------------------+
+|IDTICKET: 16                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: 6.050                                  |
+|FECHA INICIO: 2023-04-11 11:18:03.0                  |
+|TICKED GUID: c8d96161-1a44-4560-b2fb-2a3aa5595551    |
++-----------------------------------------------------+
+|IDTICKET: 17                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: 13.100                                 |
+|FECHA INICIO: 2023-04-11 11:18:44.0                  |
+|TICKED GUID: 0bc348d7-8a0f-4557-853a-5535a7c870bd    |
++-----------------------------------------------------+
+|IDTICKET: 21                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: 8.750                                  |
+|FECHA INICIO: 2023-04-11 11:45:30.0                  |
+|TICKED GUID: a4e7e61a-5985-4c9c-872b-a2372f7b42fa    |
++-----------------------------------------------------+
+|IDTICKET: 23                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: 17.500                                 |
+|FECHA INICIO: 2023-04-11 11:47:29.0                  |
+|TICKED GUID: 76c3e14a-7482-423e-881d-353b9181ba3e    |
++-----------------------------------------------------+
+|IDTICKET: 24                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 2                                        |
+|IMPORTETOTAL: 23.250                                 |
+|FECHA INICIO: 2023-04-11 12:24:35.0                  |
+|TICKED GUID: 4d8970b1-1600-4254-8ea7-20e2dc7df5cc    |
++-----------------------------------------------------+
+|IDTICKET: 24                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 2                                        |
+|IMPORTETOTAL: 23.250                                 |
+|FECHA INICIO: 2023-04-11 12:24:35.0                  |
+|TICKED GUID: 545d5577-a209-46d1-88dd-9ab527bbbac9    |
++-----------------------------------------------------+
+|IDTICKET: 25                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: 0.100                                  |
+|FECHA INICIO: 2023-04-11 12:45:40.0                  |
+|TICKED GUID: 42ae2f56-72f2-4e6b-9689-6eb2960b5b89    |
++-----------------------------------------------------+
+|IDTICKET: 28                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: 0.140                                  |
+|FECHA INICIO: 2023-04-11 12:43:10.0                  |
+|TICKED GUID: ad1668ca-b363-4b90-9d05-13c62ec231e7    |
++-----------------------------------------------------+
+|IDTICKET: 33                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 2                                        |
+|IMPORTETOTAL: 23.850                                 |
+|FECHA INICIO: 2023-04-11 12:59:01.0                  |
+|TICKED GUID: 7e418240-9cfc-40a7-9b2d-52dd2f174323    |
++-----------------------------------------------------+
+|IDTICKET: 33                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 2                                        |
+|IMPORTETOTAL: 23.850                                 |
+|FECHA INICIO: 2023-04-11 12:59:01.0                  |
+|TICKED GUID: 088e8cac-bd70-4acd-90d9-22bd9482a447    |
++-----------------------------------------------------+
+|IDTICKET: 36                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: 10.500                                 |
+|FECHA INICIO: 2023-04-12 09:34:18.0                  |
+|TICKED GUID: 198d6816-7ae7-4658-8ff4-b7c842e2a953    |
++-----------------------------------------------------+
+|IDTICKET: 37                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: 10.500                                 |
+|FECHA INICIO: 2023-04-12 09:35:26.0                  |
+|TICKED GUID: 8fa659d4-6908-4394-ac5f-631ec73640fd    |
++-----------------------------------------------------+
+|IDTICKET: 47                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 4                                        |
+|IMPORTETOTAL: 48.420                                 |
+|FECHA INICIO: 2023-04-17 10:11:14.0                  |
+|TICKED GUID: 57587773-f8e8-4ae8-a586-bf9df1d65c12    |
++-----------------------------------------------------+
+|IDTICKET: 47                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 4                                        |
+|IMPORTETOTAL: 48.420                                 |
+|FECHA INICIO: 2023-04-17 10:11:14.0                  |
+|TICKED GUID: 2c555ba7-1880-46c3-b1ee-b118ab74d8a6    |
++-----------------------------------------------------+
+|IDTICKET: 47                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 4                                        |
+|IMPORTETOTAL: 48.420                                 |
+|FECHA INICIO: 2023-04-17 10:11:14.0                  |
+|TICKED GUID: 27bcc85d-3532-4555-b89b-82ae5a979eb9    |
++-----------------------------------------------------+
+|IDTICKET: 47                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 4                                        |
+|IMPORTETOTAL: 48.420                                 |
+|FECHA INICIO: 2023-04-17 10:11:14.0                  |
+|TICKED GUID: 95aa26b8-bbf5-4ded-981e-bb3f62b45e99    |
++-----------------------------------------------------+
+|IDTICKET: 50                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 2                                        |
+|IMPORTETOTAL: 17.950                                 |
+|FECHA INICIO: 2023-04-17 10:11:43.0                  |
+|TICKED GUID: e68e2f69-2849-4603-abf9-72d123becbbc    |
++-----------------------------------------------------+
+|IDTICKET: 50                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 2                                        |
+|IMPORTETOTAL: 17.950                                 |
+|FECHA INICIO: 2023-04-17 10:11:43.0                  |
+|TICKED GUID: 808aef54-7c9f-4c25-bc33-cb36cdd11db9    |
++-----------------------------------------------------+
+|IDTICKET: 51                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 2                                        |
+|IMPORTETOTAL: 26.250                                 |
+|FECHA INICIO: 2023-04-17 10:10:49.0                  |
+|TICKED GUID: 924a621b-9cff-4798-bd67-43f8645ef41c    |
++-----------------------------------------------------+
+|IDTICKET: 51                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 2                                        |
+|IMPORTETOTAL: 26.250                                 |
+|FECHA INICIO: 2023-04-17 10:10:49.0                  |
+|TICKED GUID: 92d7db11-1d9d-417f-a401-b7abe4cb3503    |
++-----------------------------------------------------+
+|IDTICKET: 52                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: 11.880                                 |
+|FECHA INICIO: 2023-04-17 10:10:58.0                  |
+|TICKED GUID: 360d188e-0ac4-436f-8506-07d0da218ca4    |
++-----------------------------------------------------+
+|IDTICKET: 53                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: 3.340                                  |
+|FECHA INICIO: 2023-04-17 10:11:51.0                  |
+|TICKED GUID: bb389926-d0bc-4328-b2b1-bd7f00243938    |
++-----------------------------------------------------+
+|IDTICKET: 55                                         |
+|TIPO: D                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: -105.000                               |
+|FECHA INICIO: 2023-04-17 11:54:30.0                  |
+|TICKED GUID: f434aa13-608e-4a4e-a19c-c37a24eac7bd    |
++-----------------------------------------------------+
+|IDTICKET: 56                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: 15.500                                 |
+|FECHA INICIO: 2023-04-17 12:02:43.0                  |
+|TICKED GUID: d39977e8-eed4-4694-b557-f4807b23c89b    |
++-----------------------------------------------------+
+|IDTICKET: 57                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: 32.340                                 |
+|FECHA INICIO: 2023-04-17 12:02:49.0                  |
+|TICKED GUID: 9c9e078c-25bf-48e4-b797-4abbc84bd0f8    |
++-----------------------------------------------------+
+|IDTICKET: 61                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: 20.250                                 |
+|FECHA INICIO: 2023-04-17 12:02:29.0                  |
+|TICKED GUID: 79cbdf05-effc-41ff-a1a4-17cfd52b6580    |
++-----------------------------------------------------+
+|IDTICKET: 63                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: 42.500                                 |
+|FECHA INICIO: 2023-04-17 12:02:34.0                  |
+|TICKED GUID: e4978ec6-2abe-4f86-9faf-a8859df21dac    |
++-----------------------------------------------------+
+|IDTICKET: 64                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: 24.550                                 |
+|FECHA INICIO: 2023-04-17 12:02:22.0                  |
+|TICKED GUID: cbfc7dd2-bb59-4df2-8659-0716b52ae9db    |
++-----------------------------------------------------+
+|IDTICKET: 65                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 1                                        |
+|IMPORTETOTAL: 13.950                                 |
+|FECHA INICIO: 2023-04-17 12:02:15.0                  |
+|TICKED GUID: 453afe07-50bb-4b9f-ad20-01fed6f7f151    |
++-----------------------------------------------------+
+|IDTICKET: 66                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 2                                        |
+|IMPORTETOTAL: 20.570                                 |
+|FECHA INICIO: 2023-04-17 12:06:54.0                  |
+|TICKED GUID: a03ce6fc-cffe-4b2f-87ae-5038c417c62c    |
++-----------------------------------------------------+
+|IDTICKET: 66                                         |
+|TIPO: T                                              |
+|NUM LINEAS: 2                                        |
+|IMPORTETOTAL: 20.570                                 |
+|FECHA INICIO: 2023-04-17 12:06:54.0                  |
+|TICKED GUID: af3babdf-0e60-46a7-8fd0-b5058e66b111    |
++-----------------------------------------------------+
+=======================================================
