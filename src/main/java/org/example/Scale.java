@@ -3,6 +3,9 @@ package org.example;
 
 import org.json.JSONObject;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,9 +18,12 @@ import java.util.UUID;
 public class Scale {
     static Scale scale;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         Locale.setDefault(Locale.ENGLISH);
         scale = new Scale();
+
+        //Redirect System.out to log file
+        System.setOut(new PrintStream(new FileOutputStream("ImportLog.txt", true)));
 
         try (Connection con1 = dbSql.startConnection();
              Statement stmt1 = con1.createStatement()) {
@@ -28,14 +34,26 @@ public class Scale {
                 dbMysql.database = rs1.getString("btic_database");
                 dbMysql.username = rs1.getString("btic_username");
                 dbMysql.password = rs1.getString("btic_password");
-
+/*
                 System.out.println("IP: " + dbMysql.ip);
                 System.out.println("Port: " + dbMysql.port);
                 System.out.println("Database: " + dbMysql.database);
                 System.out.println("Username: " + dbMysql.username);
-                System.out.println("Password: " + dbMysql.password);
+                //System.out.println("Password: " + dbMysql.password);
                 System.out.println("Tienda: " + rs1.getString("btic_idtienda"));
-                System.out.println("====================================");
+                System.out.println("-------------------------------------------------");
+                */
+                System.out.println("+-----------------+-----------------+-----------------+");
+                System.out.printf("|Fecha importación: %-34s|\n", new java.util.Date());
+                String format = "| %-15s | %-15s | %-15s |%n";
+                System.out.println("+-----------------+-----------------+-----------------+");
+                System.out.printf(format, "IP", "Port", "Database");
+                System.out.printf(format, dbMysql.ip, dbMysql.port, dbMysql.database);
+                System.out.println("+-----------------+-----------------+-----------------+");
+                System.out.printf(format, "Username", "Tienda", "");
+                System.out.printf(format, dbMysql.username, rs1.getString("btic_idtienda"), "");
+                System.out.println("+-----------------+-----------------+-----------------+");
+
 
                 try (Connection con = dbMysql.startConnection(); Statement stmt = con.createStatement();
                      Statement stUpdate = con.createStatement(); Connection con2 = dbSql.startConnection();
@@ -63,12 +81,26 @@ public class Scale {
                             """);
 
                     while (rs.next()) {
-                        System.out.println("IDTICKET: " + scale.SelectCabecera(rs, stUpdate, stInsert, rs1.getInt("btic_IdTienda")));
+                        int comportamiento = rs.getInt("Comportamiento");
+                        String tipoTicket = rs.getString("TipoTicket");
+                        if (comportamiento == 1) tipoTicket = "D";
+                        System.out.printf("""
+                                        |IDTICKET: %-43s|
+                                        |TIPO: %-47s|
+                                        |NUM LINEAS: %-41s|
+                                        |IMPORTETOTAL: %-39s|
+                                        |FECHA INICIO: %-39s|
+                                        |TICKED GUID: %-40s|
+                                        +-----------------------------------------------------+
+                                        """,
+                                rs.getString("IdTicket"), tipoTicket, rs.getString("NumLineas"),
+                                rs.getString("ImporteTotal"), rs.getString("FechaInicio"),
+                                scale.SelectCabecera(rs, stUpdate, stInsert, rs1.getInt("btic_idtienda")));
                     }
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
-                System.out.println("====================================");
+                System.out.println("=======================================================");
 
             }
         } catch (SQLException e) {
