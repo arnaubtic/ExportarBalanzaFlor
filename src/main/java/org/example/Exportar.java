@@ -15,12 +15,12 @@ import java.util.Objects;
 import java.util.UUID;
 
 
-public class Scale {
-    static Scale scale;
+public class Exportar {
+    static Exportar exportar;
 
     public static void main(String[] args) throws FileNotFoundException {
         Locale.setDefault(Locale.ENGLISH);
-        scale = new Scale();
+        exportar = new Exportar();
 
         //Redirect System.out to log file
         System.setOut(new PrintStream(new FileOutputStream("ImportLog.txt", true)));
@@ -34,15 +34,7 @@ public class Scale {
                 dbMysql.database = rs1.getString("btic_database");
                 dbMysql.username = rs1.getString("btic_username");
                 dbMysql.password = rs1.getString("btic_password");
-/*
-                System.out.println("IP: " + dbMysql.ip);
-                System.out.println("Port: " + dbMysql.port);
-                System.out.println("Database: " + dbMysql.database);
-                System.out.println("Username: " + dbMysql.username);
-                //System.out.println("Password: " + dbMysql.password);
-                System.out.println("Tienda: " + rs1.getString("btic_idtienda"));
-                System.out.println("-------------------------------------------------");
-                */
+
                 System.out.println("+-----------------+-----------------+-----------------+");
                 System.out.printf("|Fecha importación: %-34s|\n", new java.util.Date());
                 String format = "| %-15s | %-15s | %-15s |%n";
@@ -95,7 +87,7 @@ public class Scale {
                                         """,
                                 rs.getString("IdTicket"), tipoTicket, rs.getString("NumLineas"),
                                 rs.getString("ImporteTotal"), rs.getString("FechaInicio"),
-                                scale.SelectCabecera(rs, stUpdate, stInsert, rs1.getInt("btic_idtienda")));
+                                exportar.SelectCabecera(rs, stUpdate, stInsert, rs1.getInt("btic_idtienda")));
                     }
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
@@ -166,8 +158,8 @@ public class Scale {
 
         dbMysql.update(stupdate, "update sys_datos.dat_ticket_cabecera set Enviado = 1 where idticket = " + id);
         String idTicket = cabecera.getString("bTIC_IdTicket");
-        scale.SelectLineas(idTicket, id, idEmpresa, codigoTienda);
-        scale.SelectFormaPago(idTicket, id, idEmpresa, codigoTienda);
+        exportar.SelectLineas(idTicket, id, idEmpresa, codigoTienda);
+        exportar.SelectFormaPago(idTicket, id, idEmpresa, codigoTienda);
         return idTicket;
     }
 
